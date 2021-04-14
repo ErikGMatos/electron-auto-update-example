@@ -77,14 +77,14 @@
       notification.classList.remove('hidden');
     });
 
-    ipcRenderer.on('download_progress', (progress_message) => {
+    ipcRenderer.on('download_progress', (event, progress_message) => {
       log.info('ipcRenderer on download_progress')
       ipcRenderer.removeAllListeners('update_available');
       message.innerText = progress_message;
       notification.classList.remove('hidden');
     });
 
-    ipcRenderer.on('electron_error', (error) => {
+    ipcRenderer.on('electron_error', (event, error) => {
       log.info('ipcRenderer on download_progress')
       ipcRenderer.removeAllListeners('electron_error');
       message.innerText = error;
