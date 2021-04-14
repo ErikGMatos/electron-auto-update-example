@@ -1,5 +1,6 @@
 const { autoUpdater } = require('electron-updater');
 const { app, BrowserWindow, ipcMain } = require('electron');
+const log = require('electron-log');
 
 let mainWindow;
 
