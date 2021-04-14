@@ -7,9 +7,10 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    webPreferences: {
+    webPreferences:{
       nodeIntegration: true,
-    },
+      contextIsolation: false
+    }
   });
   mainWindow.loadFile('index.html');
   mainWindow.on('closed', function () {
