@@ -16,15 +16,15 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null;
   });
-  // mainWindow.once('ready-to-show', () => {
-  //   autoUpdater.checkForUpdatesAndNotify();
-  // });
+  mainWindow.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
 }
 
 app.on('ready', () => {
   createWindow();
-  autoUpdater.autoDownload = false;
-  autoUpdater.checkForUpdatesAndNotify();
+  // autoUpdater.autoDownload = false;
+  // autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on('window-all-closed', function () {
