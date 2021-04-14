@@ -54,3 +54,22 @@ autoUpdater.on('update-available', (arg1) => {
 autoUpdater.on('update-downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
 });
+
+autoUpdater.on('error', () => {
+  mainWindow.webContents.send('electron_error');
+});
+
+autoUpdater.on("download-progress", progressObj => {
+	log.info("Tracking progress");
+	var log_message = "Download speed: " + progressObj.bytesPerSecond;
+	log_message = log_message + " - Downloaded " + progressObj.percent + "%";
+	log_message =
+		log_message +
+		" (" +
+		progressObj.transferred +
+		"/" +
+		progressObj.total +
+		")";
+	log.info(log_message);
+	mainWindow.webContents.send("download_progress", log_message);
+});

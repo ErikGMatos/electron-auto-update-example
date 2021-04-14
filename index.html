@@ -43,6 +43,7 @@
   </div>
   <script>
     const { ipcRenderer } = require('electron');
+    const log = require("electron-log");
     const version = document.getElementById('version');
     const notification = document.getElementById('notification');
     const message = document.getElementById('message');
@@ -73,6 +74,21 @@
       ipcRenderer.removeAllListeners('update_downloaded');
       message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
       restartButton.classList.remove('hidden');
+      notification.classList.remove('hidden');
+    });
+
+    ipcRenderer.on('download_progress', (progress_message) => {
+      log.info('ipcRenderer on download_progress')
+      ipcRenderer.removeAllListeners('update_available');
+      message.innerText = progress_message;
+      notification.classList.remove('hidden');
+    });
+
+    ipcRenderer.on('electron_error', (error) => {
+      log.info('ipcRenderer on download_progress')
+      ipcRenderer.removeAllListeners('electron_error');
+      message.innerText = error;
+      consoleo.log(error);
       notification.classList.remove('hidden');
     });
   </script>
