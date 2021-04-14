@@ -16,13 +16,16 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null;
   });
-  mainWindow.once('ready-to-show', () => {
-    autoUpdater.checkForUpdatesAndNotify();
-  });
+  // mainWindow.once('ready-to-show', () => {
+  //   autoUpdater.checkForUpdatesAndNotify();
+  // });
 }
 
 app.on('ready', () => {
   createWindow();
+  process.env.GH_TOKEN = "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";
+  autoUpdater.autoDownload = false;
+  autoUpdater.checkForUpdates();
 });
 
 app.on('window-all-closed', function () {
