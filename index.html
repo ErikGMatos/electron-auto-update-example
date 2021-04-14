@@ -81,6 +81,7 @@
       log.info('ipcRenderer on download_progress')
       ipcRenderer.removeAllListeners('update_available');
       message.innerText = progress_message;
+      console.log(progress_message)
       notification.classList.remove('hidden');
     });
 
@@ -88,7 +89,7 @@
       log.info('ipcRenderer on download_progress')
       ipcRenderer.removeAllListeners('electron_error');
       message.innerText = error;
-      console.log(error);
+      console.log('erro', error);
       notification.classList.remove('hidden');
     });
   </script>
