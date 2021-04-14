@@ -88,7 +88,7 @@
       log.info('ipcRenderer on download_progress')
       ipcRenderer.removeAllListeners('electron_error');
       message.innerText = error;
-      consoleo.log(error);
+      console.log(error);
       notification.classList.remove('hidden');
     });
   </script>
