@@ -23,7 +23,6 @@ function createWindow () {
 
 app.on('ready', () => {
   createWindow();
-  // process.env.GH_TOKEN = "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";
   autoUpdater.autoDownload = false;
   autoUpdater.checkForUpdates();
 });
