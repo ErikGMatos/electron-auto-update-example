@@ -13,7 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^12.0.4",
-    "electron-builder": "^22.10.5"
+    "electron-builder": "^22.10.5",
+    "electron-builder-squirrel-windows": "^22.10.5"
   },
   "dependencies": {
     "electron-log": "^4.3.4",
@@ -22,5 +23,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ErikGMatos/electron-auto-update-example.git"
+  },
+  "build": {
+    "appId": "com.example.ElectronAutoUpdate",
+    "win": {
+      "target": "squirrel"
+    }
   }
 }
