@@ -23,9 +23,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ErikGMatos/electron-auto-update-example.git"
-  },
-  "build": {
-    "appId": "com.example.ElectronAutoUpdate"
-   
   }
 }
