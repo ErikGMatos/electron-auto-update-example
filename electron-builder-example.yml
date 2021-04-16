@@ -1,0 +1,4 @@
+appId: com.example.ElectronAutoUpdate
+publish:
+  provider: <PROVIDER_REMOTE> (github|gitlab|etc)
+  token: <YOUR_TOKEN_GITHUB>
