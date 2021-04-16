@@ -1,6 +1,6 @@
 {
   "name": "electron-auto-update-example",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -22,11 +22,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ErikGMatos/electron-auto-update-example.git"
-  },
-  "publish": [
-    {
-      "provider": "github",
-      "url": "https://github.com/ErikGMatos/electron-auto-update-example"
-    }
-  ]
+  }
 }
