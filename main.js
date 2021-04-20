@@ -6,7 +6,10 @@ let mainWindow;
 const server = 'https://electron-auto-update-example-delta.vercel.app';
 const feed = `${server}/update/${process.platform}/${app.getVersion()}`;
 
-autoUpdater.setFeedURL(feed);
+autoUpdater.setFeedURL({
+  provider: 'generic',
+  url: feed
+});
 
 function createWindow () {
   mainWindow = new BrowserWindow({
