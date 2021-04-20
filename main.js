@@ -4,6 +4,8 @@ const log = require('electron-log');
 
 let mainWindow;
 
+autoUpdater.setFeedURL({provider:'github',repo:'https://github.com/ErikGMatos/electron-auto-update-example'})
+
 function createWindow () {
   mainWindow = new BrowserWindow({
     width: 800,
