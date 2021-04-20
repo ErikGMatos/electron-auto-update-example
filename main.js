@@ -60,8 +60,8 @@ autoUpdater.on('update-downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
 });
 
-autoUpdater.on('error', () => {
-  mainWindow.webContents.send('electron_error');
+autoUpdater.on('error', (error) => {
+  mainWindow.webContents.send('electron_error', error);
 });
 
 autoUpdater.on("download-progress", progressObj => {
