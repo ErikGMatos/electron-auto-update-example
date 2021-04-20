@@ -20,5 +20,9 @@
     "electron-log": "^4.3.4",
     "electron-updater": "^4.3.8",
     "https": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErikGMatos/electron-auto-update-example.git"
   }
 }
