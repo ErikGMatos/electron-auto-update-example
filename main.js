@@ -3,6 +3,10 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const log = require('electron-log');
 
 let mainWindow;
+const server = 'https://electron-auto-update-example-delta.vercel.app';
+const feed = `${server}/update/${process.platform}/${app.getVersion()}`;
+
+autoUpdater.setFeedURL(feed);
 
 function createWindow () {
   mainWindow = new BrowserWindow({
