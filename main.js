@@ -3,6 +3,13 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const log = require('electron-log');
 
 let mainWindow;
+const server = 'https://electron-auto-update-example-delta.vercel.app';
+const feed = `${server}/update/${process.platform}/${app.getVersion()}`;
+
+autoUpdater.setFeedURL({
+  provider: 'generic',
+  url: feed
+});
 
 function createWindow () {
   mainWindow = new BrowserWindow({
@@ -57,8 +64,9 @@ ipcMain.on('restart_app', () => {
 //   mainWindow.webContents.send('update_downloaded');
 // });
 
-// autoUpdater.on('error', () => {
-//   mainWindow.webContents.send('electron_error');
+
+// autoUpdater.on('error', (error) => {
+//   mainWindow.webContents.send('electron_error', error);
 // });
 
 // autoUpdater.on("download-progress", progressObj => {
