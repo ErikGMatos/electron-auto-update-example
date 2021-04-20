@@ -42,10 +42,8 @@
     </button>
   </div>
   <script>
-    const { ipcRenderer, remote } = require('electron');
+    const { ipcRenderer } = require('electron');
     const log = require("electron-log");
-    const https = require("https");
-    const { execFile } = require("child_process");
     const version = document.getElementById('version');
     const notification = document.getElementById('notification');
     const message = document.getElementById('message');
@@ -60,107 +58,39 @@
 
     ipcRenderer.send('app_version');
 
-    // ipcRenderer.on('app_version', (event, arg) => {
-    //   ipcRenderer.removeAllListeners('app_version');
-    //   version.innerText = 'Version ' + arg.version;
-    // });
+    ipcRenderer.on('app_version', (event, arg) => {
+      ipcRenderer.removeAllListeners('app_version');
+      version.innerText = 'Version ' + arg.version;
+    });
 
-    // ipcRenderer.on('update_available', (event, arg) => {
-    //   console.log(arg)
-    //   ipcRenderer.removeAllListeners('update_available');
-    //   message.innerText = 'A new update is available. Downloading now...';
-    //   notification.classList.remove('hidden');
-    // });
-
-    // ipcRenderer.on('update_downloaded', () => {
-    //   ipcRenderer.removeAllListeners('update_downloaded');
-    //   message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
-    //   restartButton.classList.remove('hidden');
-    //   notification.classList.remove('hidden');
-    // });
-
-    // ipcRenderer.on('download_progress', (event, progress_message) => {
-    //   log.info('ipcRenderer on download_progress')
-    //   ipcRenderer.removeAllListeners('update_available');
-    //   message.innerText = progress_message;
-    //   console.log(progress_message)
-    //   notification.classList.remove('hidden');
-    // });
-
-    // ipcRenderer.on('electron_error', (event, error) => {
-    //   log.info('ipcRenderer on download_progress')
-    //   ipcRenderer.removeAllListeners('electron_error');
-    //   message.innerText = error;
-    //   console.log('erro', error);
-    //   notification.classList.remove('hidden');
-    // });
+    ipcRenderer.on('update_available', (event, arg) => {
+      console.log(arg)
+      ipcRenderer.removeAllListeners('update_available');
+      message.innerText = 'A new update is available. Downloading now...';
+      notification.classList.remove('hidden');
+    });
     
+    ipcRenderer.on('update_downloaded', () => {
+      ipcRenderer.removeAllListeners('update_downloaded');
+      message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
+      restartButton.classList.remove('hidden');
+      notification.classList.remove('hidden');
+    });
 
-    // check for updates and install if there is one
-    function checkForUpdates() {
-      debugger
-      // document.getElementById('update-status').innerText = 'Checking for updates...'
-      console.log("Checking for updates...");
+    ipcRenderer.on('download_progress', (event, progress_message) => {
+      log.info('ipcRenderer on download_progress')
+      ipcRenderer.removeAllListeners('update_available');
+      message.innerText = progress_message;
+      console.log(progress_message)
+      notification.classList.remove('hidden');
+    });
 
-      const platform = remote.process.platform;
-
-      https.get(
-        `https://electron-auto-update-example-delta.vercel.app/update/${platform}/${remote.app.getVersion()}/`,
-        (response) => {
-          let data = "";
-
-          //another chunk of data has been received, so append it to `str`
-          response.on("data", function (chunk) {
-            data += chunk;
-          });
-
-          response.on("error", function (err) {
-            console.log(err);
-          });
-
-          //the whole response has been received
-          response.on("end", function () {
-            data = JSON.parse(data);
-            console.log(data);
-            const cachedVersion = data.name.substring(1);
-
-            console.log("current app version: ", remote.app.getVersion());
-            console.log("latest app version: ", cachedVersion);
-
-            if (cachedVersion > remote.app.getVersion()) {
-              console.log("Update required!");
-              // document.getElementById('update-status').innerText = 'Update available!'
-              ipcRenderer.send("download-update", cachedVersion);
-            } else {
-              // document.getElementById('update-status').innerText = 'No update available.'
-              console.log("No update required");
-            }
-          });
-        }
-      );
-
-      ipcRenderer.on("download-successful", (event, filePath) => {
-        setTimeout(() => {
-          installUpdate(filePath);
-        }, 4000);
-      });
-    }
-
-    function installUpdate(filePath) {
-
-      console.log("install update..");
-
-      const executablePath = filePath;
-
-      execFile(executablePath, ['--version'], { maxBuffer: 1024 * 102400 }, function (err, data) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        console.log(data.toString());
-      });
-    }
-
-    checkForUpdates();
+    ipcRenderer.on('electron_error', (event, error) => {
+      log.info('ipcRenderer on download_progress')
+      ipcRenderer.removeAllListeners('electron_error');
+      message.innerText = error;
+      console.log('erro', error);
+      notification.classList.remove('hidden');
+    });
   </script>
 </body>
