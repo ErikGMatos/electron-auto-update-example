@@ -4,17 +4,6 @@ const log = require('electron-log');
 
 let mainWindow;
 
-autoUpdater.setFeedURL({
-  provider: 'github',
-  repo: 'electron-auto-update-example',
-  owner: 'erikgmatos',
-},{
-  releaseType: 'release',
-  provider: 'github',
-  owner: 'erikgmatos',
-  repo: 'electron-auto-update-example',
-})
-
 function createWindow () {
   mainWindow = new BrowserWindow({
     width: 800,
