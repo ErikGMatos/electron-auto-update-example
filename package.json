@@ -1,6 +1,6 @@
 {
   "name": "electron-auto-update-example",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "appId": "com.my.website",
     "productName": "MyProduct",
     "directories": {
-      "output": "build"
+      "output": "dist"
     },
     "publish": {
       "provider": "github",
